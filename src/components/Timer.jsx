@@ -1,10 +1,26 @@
-
+import { h } from 'preact';
 import { useState, useEffect, useRef } from 'preact/hooks';
 
-const Timer = ({ start }) => {
+const Timer = ({ start, reset }) => {
     const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
-    const [isRunning, setIsRunning] = useState(start);
+    const [isRunning, setIsRunning] = useState(false);
     const intervalRef = useRef(null);
+
+    useEffect(() => {
+        if (start) {
+            setIsRunning(true);
+        } else {
+            setIsRunning(false);
+            clearInterval(intervalRef.current);
+        }
+    }, [start]);
+
+    useEffect(() => {
+        if (reset) {
+            clearInterval(intervalRef.current);
+            setTime({ h: 0, m: 0, s: 0 });
+        }
+    }, [reset]);
 
     useEffect(() => {
         if (isRunning) {
@@ -18,16 +34,12 @@ const Timer = ({ start }) => {
                     return { h, m, s };
                 });
             }, 1000);
+        } else {
+            clearInterval(intervalRef.current);
         }
 
         return () => clearInterval(intervalRef.current);
     }, [isRunning]);
-
-    const reset = () => {
-        clearInterval(intervalRef.current);
-        setTime({ h: 0, m: 0, s: 0 });
-        setIsRunning(false);
-    };
 
     const formatTime = (unit) => unit < 10 ? `0${unit}` : unit;
 
@@ -36,9 +48,6 @@ const Timer = ({ start }) => {
             <div id="hms">
                 {`${formatTime(time.h)}:${formatTime(time.m)}:${formatTime(time.s)}`}
             </div>
-            <button className="start" onClick={() => setIsRunning(true)}>Start</button>
-            <button className="stop" onClick={() => setIsRunning(false)}>Stop</button>
-            <button className="reiniciar" onClick={reset}>Reset</button>
         </div>
     );
 };

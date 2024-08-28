@@ -4,7 +4,6 @@ import { PreguntasPorCategoria } from '../components/preguntas.jsx';
 import Categorias from '../components/Categorias.jsx'
 import ContadorTiempo from '../components/ContadorTiempo';
 import Timer from '../components/Timer'
-import Quiz from '../components/Quiz'
 
 const mango = import.meta.env.PUBLIC_DATABASE_URL;
 const categoriaId: any = 1;
@@ -43,22 +42,14 @@ console.log('hola '+mango);
 				</linearGradient>
 			</defs>
 		</svg>
-		<h1>Welcome to <span class="text-gradient">Astro {mango}</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
+		<h1>Welcome to <span class="text-gradient">PAGINA DOS</span></h1>
 		<h2>
 			<Timer transition:persist client:load start={true} reset={false} />
 		</h2>
-		<div>
-			<Quiz client:load />
-		</div>
 		<ul role="list" class="link-card-grid text-white">
 			<h1>Preguntas de la Categoría {categoriaId}</h1>
 			<Categorias client:load />
 		</ul>
-		<a href="./index2">IR A LA SEGUNDA</a>
 	</main>
 </Layout>
 

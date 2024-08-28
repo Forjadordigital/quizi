@@ -1,0 +1,19 @@
+Rally Quiz
+
+Pag 1 - Portada con botón START
+
+pag 2 - Logo + Copy + InputName + btnSiguiente (Guarda nombre en local Storage)
+
+pag 3 - Agradecimiento e instrucciones y botón empezar
+
+pag 4 - Primera pregunta + x Respuestas (Inicia el contador de tiempos, el contador perciste entre todas las paginas de cuestionarios)
+
+pag 5 - Segunda pregunta
+
+pag 6 - Tercera pregunta
+
+pag 7 - Felicitaciones y tiempo de reloj en grande
+
+pag 8 - Tabla de puestos
+
+pag 9 - btnAR

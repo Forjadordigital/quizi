@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Quiz from '../components/Quiz'
+
+const mango = import.meta.env.PUBLIC_DATABASE_URL;
+const categoriaId: any = 1;
+console.log('hola '+mango);
+
+ 
+---
+
+<Layout title="Welcome to Astro.">
+	<Header title="Quiz Game" />
+	<main class="flex flex-col justify-center pt-20">
+		<Quiz client:load />
+	</main>
+</Layout>
+
+<style>
+	
+</style>

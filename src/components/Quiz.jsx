@@ -16,7 +16,7 @@ function OpcionRespuesta({ texto, esCorrecta, onAnswer }) {
 
   return (
     <button
-      className={`py-2 px-4 first:mt-4 mb-4 text-slate-700 font-semibold text-start rounded ${fondo}`} // Aplicamos la clase de fondo dinámica
+      className={`py-2 px-4 first:mt-4 mb-4 text-slate-700 text-xl font-semibold text-start shadow-lg rounded ${fondo}`} // Aplicamos la clase de fondo dinámica
       onClick={handleClick}
     >
       {texto}
@@ -28,18 +28,18 @@ const Quiz = () => {
   const questions = [
     {
       question: "¿Cuál es el índice Gini?",
-      options: ["Índice de desempleo", "Índice de educación", "Índice de poder adquisitivo", "Índice de desigualdad de la riqueza"],
-      correctAnswer: "Índice de desigualdad de la riqueza"
+      options: ["A - Índice de desempleo", "B - Índice de educación", "C - Índice de poder adquisitivo", "D - Índice de desigualdad de la riqueza"],
+      correctAnswer: "D - Índice de desigualdad de la riqueza"
     },
     {
       question: "¿Cuál es el apodo por el que se conoce a la ciudad de Roma?",
-      options: ["La ciudad eterna", "La bien amada de Dios", "La ciudad de Pedro", "La cuna de la civilización"],
-      correctAnswer: "La ciudad eterna"
+      options: ["A - La ciudad eterna", "B - La bien amada de Dios", "C - La ciudad de Pedro", "D - La cuna de la civilización"],
+      correctAnswer: "A - La ciudad eterna"
     },
     {
       question: "¿Cuál es el nombre del creador de las Leyes de la Robótica?",
-      options: ["Pablo Coelho", "Mark Twain", "Victor Hugo", "Isaac Asimov"],
-      correctAnswer: "Isaac Asimov"
+      options: ["A - Pablo Coelho", "B - Mark Twain", "C - Victor Hugo", "D - Isaac Asimov"],
+      correctAnswer: "D - Isaac Asimov"
     }
   ];
 
@@ -74,12 +74,11 @@ const Quiz = () => {
     <div class="flex flex-col justify-center">
       <Timer start={startTimer} reset={false} onStop={handleTimerStop} />
       {!quizCompleted ? (
-        <div>
-          <h2 className="text-4xl">{questions[currentQuestionIndex].question}</h2>
+        <div className="mt-10 p-4">
+          <h2 className="text-3xl bg-slate-200 py-5 px-4 rounded-lg shadow-lg">{questions[currentQuestionIndex].question}</h2>
           <div className="flex flex-col">
             {questions[currentQuestionIndex].options.map((option, index) => (
               <OpcionRespuesta
-                
                 key={option}
                 texto={option}
                 esCorrecta={option === questions[currentQuestionIndex].correctAnswer}
@@ -90,7 +89,7 @@ const Quiz = () => {
         </div>
       ) : (
         <div className="text-center text-2xl">
-          <h2 className="text-4xl text-center text-pink-500 uppercase font-bold">¡Felicidades lo has completado!</h2>
+          <h2 className="text-4xl mt-10 text-center text-pink-500 uppercase font-bold">¡Felicidades lo has completado!</h2>
           <p className="my-3">Total Time: {totalTime} ms</p>
         </div>
       )}

@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import InputApodo from "../components/InputApodo"
+---
+
+<Layout title="Pepsi Quiz Game">
+    <Header title="Quiez Game - Registro" />
+    <main
+        class="md:w-1/2 sm:w-full min-h-[500px] mt-24 m-auto flex flex-col justify-start items-center"
+    >
+        <div class="px-6">
+            <h2 class="text-3xl text-center mb-6 font-bold text-slate-800">
+                ¿Cúal es tu Apodo?
+            </h2>
+            <h3 class="text-xl font-semibold mb-4 text-slate-800 text-center">
+                ¡Prepárate para poner a prueba tus conocimientos!
+            </h3>
+            <p class="text-md text-slate-900 font-base">
+                Antes de comenzar esta aventura de preguntas y respuestas,
+                necesitamos un <span class="font-bold">nombre épico</span> para ti.
+                <span class="font-semibold"
+                    >¡Regístrate con tu apodo más cool y conviértete en una
+                    leyenda de los quizzes!</span
+                >
+            </p>
+        </div>
+        <InputApodo client:load />
+    </main>
+</Layout>
+
+<style>
+
+
+</style>

@@ -52,7 +52,7 @@ const Timer = ({ start, reset, onStop }) => {
 
     return (
         <div>
-            <div id="hms" className="text-9xl text-center font-semibold text-slate-200 mb-6">
+            <div id="hms" className="text-6xl text-center font-semibold text-yellow-400 mb-6">
                 {`${formatTime(time.h)}:${formatTime(time.m)}:${formatTime(time.s)}`}
             </div>
         </div>

@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ request }) => {
 
     if (apodo === "") {
         return new Response(JSON.stringify({ status: 'vacio', message: 'No se puede participar sin apodo' }))
-      }
+    }
 
     const query = `
       SELECT COUNT(*) AS count

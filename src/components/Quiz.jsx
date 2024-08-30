@@ -1,22 +1,19 @@
 import { useState } from 'preact/hooks';
-import Timer from './Timer.jsx'; // Asumo que ya tienes este componente
+import Timer from './Timer.jsx'; // Componente de cronómetro
+import TimerFormato from './TiempoFormato.jsx'
+import TiempoFormato from './TiempoFormato.jsx';
 
 function OpcionRespuesta({ texto, esCorrecta, onAnswer }) {
-  const [fondo, setFondo] = useState('bg-slate-200'); // Estado para el fondo
+  const [fondo, setFondo] = useState('bg-slate-200');
 
   const handleClick = () => {
-    if (esCorrecta) {
-      setFondo('bg-green-500'); // Cambiar a verde si es correcta
-    } else {
-      setFondo('bg-red-500'); // Cambiar a rojo si es incorrecta
-    }
-    // Llamamos a la función proporcionada por el componente padre
+    setFondo(esCorrecta ? 'bg-green-500' : 'bg-red-500');
     onAnswer(esCorrecta);
   };
 
   return (
     <button
-      className={`py-2 px-4 first:mt-4 mb-4 text-slate-700 text-xl font-semibold text-start shadow-lg rounded ${fondo}`} // Aplicamos la clase de fondo dinámica
+      className={`py-2 px-4 first:mt-4 mb-4 text-slate-700 text-xl font-semibold text-start shadow-lg rounded ${fondo}`}
       onClick={handleClick}
     >
       {texto}
@@ -43,11 +40,13 @@ const Quiz = () => {
     }
   ];
 
+  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [startTimer, setStartTimer] = useState(true);
   const [totalTime, setTotalTime] = useState(0);
+  const [showFinalTime, setShowFinalTime] = useState(false);
 
   const handleAnswer = (esCorrecta) => {
     if (esCorrecta) {
@@ -57,27 +56,51 @@ const Quiz = () => {
         if (currentQuestionIndex < questions.length - 1) {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
-          setStartTimer(false); // Detiene el cronómetro
-          setQuizCompleted(true); // Marca el quiz como completado
+          setStartTimer(false);
+          setQuizCompleted(true);
         }
       }, 1000);
     }
-    // Aquí puedes manejar la lógica para respuestas incorrectas si lo deseas
   };
+
+  // EL ERROR ESTA EN EL CONTADOR QUE VA REVISANDO EL ESTADO DE LAS PREGUNTAS
 
   const handleTimerStop = (time) => {
     setTotalTime(time);
     console.log(`Total time: ${time} ms`);
   };
 
+  const enviarResultados = async () => {
+    const apodo = localStorage.getItem('apodo');
+    if (apodo) {
+      try {
+        const response = await fetch(`/api/actualizaciones?apodo=${apodo}&tiempo=${totalTime}`, {
+          method: 'GET'
+        });
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data);
+        setShowFinalTime(true);
+      } catch (error) {
+        console.error('Error al enviar los resultados:', error);
+      }
+    } else {
+      console.error('No se encontró el apodo en localStorage');
+    }
+  };
+
+  if (quizCompleted) {
+    enviarResultados();
+  }
+
   return (
-    <div class="flex flex-col justify-center">
-      <Timer start={startTimer} reset={false} onStop={handleTimerStop} />
+    <div class="w-full flex flex-col justify-center">
+      {!showFinalTime && <Timer start={startTimer} reset={false} onStop={handleTimerStop} />}
+      {/* <Timer start={startTimer} reset={false} onStop={handleTimerStop} /> */}
       {!quizCompleted ? (
-        <div className="mt-10 p-4">
+        <div className="w-full mt-10 p-4">
           <h2 className="text-3xl bg-slate-200 py-5 px-4 rounded-lg shadow-lg">{questions[currentQuestionIndex].question}</h2>
           <div className="flex flex-col">
-            {questions[currentQuestionIndex].options.map((option, index) => (
+            {questions[currentQuestionIndex].options.map((option) => (
               <OpcionRespuesta
                 key={option}
                 texto={option}
@@ -88,9 +111,10 @@ const Quiz = () => {
           </div>
         </div>
       ) : (
-        <div className="text-center text-2xl">
-          <h2 className="text-4xl mt-10 text-center text-pink-500 uppercase font-bold">¡Felicidades lo has completado!</h2>
-          <p className="my-3">Total Time: {totalTime} ms</p>
+        <div className="text-center mt-10  text-2xl flex flex-col justify-center items-center w-full">
+          <TiempoFormato milisegundos={totalTime} />
+          <h2 className="text-4xl text-center text-pink-500 uppercase font-bold">¡Felicidades lo has completado!</h2>
+          {/* <p className="my-3">Total Time: {totalTime} ms</p> */}
         </div>
       )}
     </div>

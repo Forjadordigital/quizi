@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Boton from '../components/Boton.astro'
 
+const direccion = import.meta.env.PUBLIC_DATABASE_URL
+
 ---
 
 <Layout title="Pepsi Quiz Game">
@@ -10,6 +12,7 @@ import Boton from '../components/Boton.astro'
 			<div class="text-center">
 				<img src="https://logoquiz.net/logo.png" alt="Logo del juego de Quiz de LOGO">
 				<h1 class="text-yellow-400 font-bold text-3xl mt-2">Welcome to the <span>Trivia Game</span></h1>
+				<p>{direccion}</p>
 			</div>
 	
 			<Boton text="Hola soy un boton" url="#" class="bg-yellow-500" />

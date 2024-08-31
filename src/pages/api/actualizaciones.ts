@@ -9,6 +9,8 @@ export const GET: APIRoute = async ({ request }) => {
         const apodo = searchParams.get('apodo');
         const nuevoTiempo = searchParams.get('tiempo');
 
+        console.log("El nuevo tiempo es: "+nuevoTiempo)
+
         if (!apodo || !nuevoTiempo) {
             return new Response(JSON.stringify({
                 status: 'error',

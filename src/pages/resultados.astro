@@ -1,0 +1,22 @@
+---
+import Clasificaciones from '../components/Clasificaciones';
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+
+---
+
+<Layout title="Pepsi Quiz Game">
+    <Header title="Quiz Game Resultados" />
+	<main class="md:w-1/2 sm:w-full pt-10  m-auto  flex flex-col justify-between items-center">
+		<div class="min-h-[500px]  flex flex-col justify-between items-center">
+			<h1 class="text-2xl text-slate-800 text-center mb-6">
+                Resultados
+            </h1>
+            <Clasificaciones client:load />
+		</div>
+	</main>
+</Layout>
+
+<style>
+
+</style>

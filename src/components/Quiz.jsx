@@ -59,6 +59,7 @@ const Quiz = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [startTimer, setStartTimer] = useState(true);
   const [totalTime, setTotalTime] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [showFinalTime, setShowFinalTime] = useState(false);
   const [resultsSent, setResultsSent] = useState(false);
 
@@ -74,12 +75,17 @@ const Quiz = () => {
           setQuizCompleted(true);
         }
       }, 1000);
+    }else{
+      setIncorrectAnswers(incorrectAnswers + 1);
     }
   };
 
   const handleTimerStop = (time) => {
     console.log(`Total time captured: ${time} ms`);
-    setTotalTime(time);
+    const adjustedTime = time + incorrectAnswers * 500;
+    console.log("El tiempo negativo sumado por erroes es: "+incorrectAnswers * 500)
+    console.log(`Total de penalización: ${adjustedTime} ms`);
+    setTotalTime(adjustedTime);
   };
 
   useEffect(() => {
@@ -133,9 +139,10 @@ const Quiz = () => {
       ) : (
         <div className="text-center mt-10 text-2xl flex flex-col justify-center items-center w-full">
           <TiempoFormato milisegundos={totalTime} />
-          <h2 className="text-4xl text-center text-pink-500 uppercase font-bold">
+          <h2 className="text-4xl text-center text-pink-500 uppercase font-bold mb-6 ">
             ¡Felicidades lo has completado!
           </h2>
+          <a href="./resultados" className="py-3 w-1/2 bg-pink-500 text-white text-xl font-semibold rounded-lg shadow-lg" >Continuar</a>
         </div>
       )}
     </div>

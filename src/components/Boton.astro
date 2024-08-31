@@ -1,0 +1,14 @@
+---
+
+import {obtenerUsuarioDesdeLocalStorage} from '../utils/dameApodo'
+
+const { text, url, class: className } = Astro.props 
+
+console.log('El color de fondo es: '+className)
+
+const bg = className !== '' && className !== undefined ? className : 'bg-zinc-400';
+
+---
+<a href={url} class=`w-1/2 text-center py-3 text-lg font-semibold rounded-lg ${bg} border-2 border-slate-900 shadow-lg `>
+    {text}
+</a>

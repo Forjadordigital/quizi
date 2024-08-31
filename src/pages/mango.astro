@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Boton from '../components/Boton.astro'
 
 const direccion = import.meta.env.PUBLIC_DATABASE_URL
+const merda = import.meta.env.DATABASE_AUTH_TOKEN
+
 
 ---
 
@@ -13,6 +15,9 @@ const direccion = import.meta.env.PUBLIC_DATABASE_URL
 				<img src="https://logoquiz.net/logo.png" alt="Logo del juego de Quiz de LOGO">
 				<h1 class="text-yellow-400 font-bold text-3xl mt-2">Welcome to the <span>Trivia Game</span></h1>
 				<p>{direccion}</p>
+				<h6>
+					{merda}
+				</h6>
 			</div>
 	
 			<Boton text="Hola soy un boton" url="#" class="bg-yellow-500" />

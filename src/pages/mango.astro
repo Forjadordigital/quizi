@@ -4,6 +4,7 @@ import Boton from '../components/Boton.astro'
 
 const direccion = import.meta.env.TURSO_DB_URL
 const merda = import.meta.env.TURSO_DB_AUTH_TOKEN
+const mangonio = import.meta.env.MANGO_NAME
 
 
 ---
@@ -16,7 +17,7 @@ const merda = import.meta.env.TURSO_DB_AUTH_TOKEN
 				<h1 class="text-yellow-400 font-bold text-3xl mt-2">Welcome to the <span>Trivia Game</span></h1>
 				<p>{direccion}</p>
 				<h6>
-					{merda}
+					{mangonio}
 				</h6>
 			</div>
 	

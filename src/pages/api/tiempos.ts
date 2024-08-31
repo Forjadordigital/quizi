@@ -23,6 +23,6 @@ export const GET: APIRoute = async () => {
     });
   } catch (error) {
     console.error('Error al obtener los tiempos:', error);
-    return new Response('Internal Server Error ME CAGO EN TODO', { status: 500 });
+    return new Response('Internal Server Error ME CAGO EN TODO: '+error, { status: 500 });
   }
 };
